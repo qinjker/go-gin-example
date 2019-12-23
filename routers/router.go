@@ -3,8 +3,8 @@ package routers
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/EDDYCJY/go-gin-example/pkg/setting"
-	v1 "github.com/EDDYCJY/go-gin-example/routers/api/v1"
+	"github.com/QINJKER/go-gin-example/pkg/setting"
+	v1 "github.com/QINJKER/go-gin-example/routers/api/v1"
 )
 
 func InitRouter() *gin.Engine {

@@ -2,16 +2,15 @@ package v1
 
 import (
 	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/astaxie/beego/validation"
-
 	"github.com/unknwon/com"
 
-	"github.com/EDDYCJY/go-gin-example/pkg/e"
-	"github.com/EDDYCJY/go-gin-example/models"
-	"github.com/EDDYCJY/go-gin-example/pkg/util"
-	"github.com/EDDYCJY/go-gin-example/pkg/setting"
-
+	"github.com/QINJKER/go-gin-example/models"
+	"github.com/QINJKER/go-gin-example/pkg/e"
+	"github.com/QINJKER/go-gin-example/pkg/setting"
+	"github.com/QINJKER/go-gin-example/pkg/util"
 )
 
 //获取多个文章标签
@@ -125,7 +124,7 @@ func DeleteTag(c *gin.Context) {
 	valid := validation.Validation{}
 	valid.Min(id, 1, "id").Message("ID必须大于0")
 
-   code := e.INVALID_PARAMS
+	code := e.INVALID_PARAMS
 	if ! valid.HasErrors()  {
 		code = e.SUCCESS
 		if models.ExistTagByID(id) {

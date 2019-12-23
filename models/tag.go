@@ -15,6 +15,19 @@ type Tag struct {
 	State int `json:"state"`
 }
 
+func ExistTagByID(id int) bool {
+	var tag Tag
+	err := db.Select("id").Where("id = ? AND deleted_on = ? ", id, 0).First(&tag).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		return false
+	}
+	if tag.ID > 0 {
+		return true
+	}
+
+	return false
+}
+
 func GetTags(pageNum int, pageSize int, maps interface {}) (tags []Tag) {
 	db.Where(maps).Offset(pageNum).Limit(pageSize).Find(&tags)
 
@@ -45,6 +58,22 @@ func AddTag(name string, state int, createdBy string) bool{
 	})
 
 	return true
+}
+
+func DeleteTag(id int) error {
+	if err := db.Where("id = ?", id).Delete(&Tag{}).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func EditTag(id int, data interface{}) error {
+	if err := db.Model(&Tag{}).Where("id = ? AND deleted_on = ? ", id, 0).Updates(data).Error; err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (tag *Tag) BeforeCreate(scope *gorm.Scope) error {

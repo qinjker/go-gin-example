@@ -1,16 +1,16 @@
 package models
 
 import (
-	"github.com/jinzhu/gorm"
-
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 type Article struct {
 	Model
 
-	TagId int `json:"tag_id" gorm:"index"`
-	Tag Tag `json:"tag"`
+	TagID int `json:"tag_id" gorm:"index"`
+	Tag   Tag `json:"tag"`
 
 	Title string `json:"title"`
 	Desc string `json:"desc"`
@@ -19,10 +19,9 @@ type Article struct {
 	ModifiedBy string `json:"modified_by"`
 	State int `json:"state"`
 }
-
-func ExistArticleById(id int) bool  {
+func ExistArticleByID(id int) bool  {
 	var article Article
-	db.Select("id").Where("id = ?",id).Frist(&article)
+	db.Select("id").Where("id = ?", id).First(&article)
 	if article.ID > 0 {
 		return true
 	}
@@ -34,8 +33,9 @@ func GetArticleTotal(maps interface{}) (count int) {
 	return
 }
 
-func GetArticles(pageNum int, pageSize int,maps interface{}) (articles []Article)  {
-	db.Preload("Tag").where(maps).Offset(pageNum).Limit(pageSize).find(&articles)
+func GetArticles(pageNum int, pageSize int, maps interface {}) (articles []Article) {
+	db.Preload("Tag").Where(maps).Offset(pageNum).Limit(pageSize).Find(&articles)
+
 	return
 }
 

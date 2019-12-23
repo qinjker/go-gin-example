@@ -1,13 +1,17 @@
 package v1
 
 import (
+	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
-	"github.com/qinjker/go-gin-example/models"
-	"github.com/qinjker/go-gin-example/pkg/e"
-	"github.com/qinjker/go-gin-example/pkg/setting"
-	"github.com/qinjker/go-gin-example/pkg/util"
 	"log"
 	"net/http"
+
+	"github.com/unknwon/com"
+
+	"github.com/QINJKER/go-gin-example/models"
+	"github.com/QINJKER/go-gin-example/pkg/e"
+	"github.com/QINJKER/go-gin-example/pkg/setting"
+	"github.com/QINJKER/go-gin-example/pkg/util"
 )
 
 
@@ -22,7 +26,7 @@ func GetArticle(c *gin.Context)  {
 	code := e.INVALID_PARAMS
 	var data interface{}
 	if ! valid.HasErrors() {
-		if models.EditArticleByID(id) {
+		if models.ExistArticleByID(id) {
 			data = models.GetArticle(id)
 			code = e.SUCCESS
 		} else {

@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/QINJKER/go-gin-example/pkg/setting"
+	"github.com/QINJKER/go-gin-example/routers"
 	"net/http"
-
-	"github.com/qinjker/go-gin-example/routers"
-	"github.com/qinjker/go-gin-example/pkg/setting"
 )
 
 func main() {
