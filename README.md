@@ -1,1 +1,1 @@
-Go Gin Example
+Go Gin Exampl
